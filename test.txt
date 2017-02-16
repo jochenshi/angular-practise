@@ -1,1 +1,2 @@
-this is a file used to test git.
+this is a file used to test git.(writtten local)
+this new line is used to test pull in local(written in github)

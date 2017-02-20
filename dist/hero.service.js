@@ -16,6 +16,10 @@ var HeroService = (function () {
     HeroService.prototype.getHeros = function () {
         return Promise.resolve(mock_hero_1.HEROS);
     };
+    HeroService.prototype.getHero = function (id) {
+        return this.getHeros()
+            .then(function (heros) { return heros.find(function (hero) { return hero.id === id; }); });
+    };
     return HeroService;
 }());
 HeroService = __decorate([

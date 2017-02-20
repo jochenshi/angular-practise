@@ -12,9 +12,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by Jincheng on 2017/2/10.
  */
 var core_1 = require("@angular/core");
-var hero_service_1 = require("hero.service");
+var router_1 = require("@angular/router");
+var hero_service_1 = require("./hero.service");
 var DashboardComponent = (function () {
-    function DashboardComponent(heroService) {
+    function DashboardComponent(router, heroService) {
+        this.router = router;
         this.heroService = heroService;
         this.heros = [];
     }
@@ -23,16 +25,19 @@ var DashboardComponent = (function () {
         this.heroService.getHeros()
             .then(function (heros) { return _this.heros = heros.slice(1, 5); });
     };
-    DashboardComponent.prototype.gotoDetail = function (hero) { };
+    DashboardComponent.prototype.gotoDetail = function (hero) {
+        var link = ['/detail', hero.id];
+        this.router.navigate(link);
+    };
     return DashboardComponent;
 }());
 DashboardComponent = __decorate([
     core_1.Component({
         selector: 'my-dashboard',
-        templateUrl: 'app/dashboard.component.html'
+        templateUrl: 'app/dashboard.component.html',
+        styleUrls: ['app/dashboard.component.css']
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof hero_service_1.HeroService !== "undefined" && hero_service_1.HeroService) === "function" && _a || Object])
+    __metadata("design:paramtypes", [router_1.Router, hero_service_1.HeroService])
 ], DashboardComponent);
 exports.DashboardComponent = DashboardComponent;
-var _a;
 //# sourceMappingURL=dashboard.component.js.map

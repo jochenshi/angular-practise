@@ -12,10 +12,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by Jincheng on 2017/2/10.
  */
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var hero_1 = require("./hero");
+var hero_service_1 = require("./hero.service");
 var HeroDetailComponent = (function () {
-    function HeroDetailComponent() {
+    function HeroDetailComponent(heroService, route) {
+        this.heroService = heroService;
+        this.route = route;
     }
+    HeroDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.forEach(function (params) {
+            var id = +params['id'];
+            _this.heroService.getHero(id)
+                .then(function (hero) { return _this.hero = hero; });
+        });
+    };
+    HeroDetailComponent.prototype.goBack = function () {
+        window.history.back();
+    };
     return HeroDetailComponent;
 }());
 __decorate([
@@ -25,8 +40,10 @@ __decorate([
 HeroDetailComponent = __decorate([
     core_1.Component({
         selector: 'my-hero-detail',
-        template: "\n        <div *ngIf=\"hero\">\n            <h2>{{hero.name}} details!</h2>\n            <div><label>id: </label>{{hero.id}}</div>\n            <div>\n                <label>name:</label>\n                <input [(ngModel)]=\"hero.name\" placeholder=\"name\">\n            </div>\n        </div>    \n    "
-    })
+        templateUrl: 'app/hero-detail.component.html',
+        styleUrls: ['app/hero-detail.component.css']
+    }),
+    __metadata("design:paramtypes", [hero_service_1.HeroService, router_1.ActivatedRoute])
 ], HeroDetailComponent);
 exports.HeroDetailComponent = HeroDetailComponent;
 //# sourceMappingURL=hero-detail.component.js.map

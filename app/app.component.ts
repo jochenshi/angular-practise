@@ -12,8 +12,8 @@ import {Component} from '@angular/core';
             <a routerLink="/heroes">Heros</a>
         </nav>
         <router-outlet></router-outlet>
-        <my-heroes></my-heroes>
-    `
+    `,
+    styleUrls:['app/app.component.css']
 })
 
 export class AppComponent {
